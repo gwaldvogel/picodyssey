@@ -11,6 +11,9 @@ ios {
     QMAKE_INFO_PLIST = ios/Info.plist
     ios_icon.files = $$files($$PWD/ios/icons/Icon*.png)
     QMAKE_BUNDLE_DATA += ios_icon
+    app_launch_images.files = $$files($$PWD/ios/splashscreens/LaunchImage*.png)
+# $$PWD/ios/Launch.xib
+    QMAKE_BUNDLE_DATA += app_launch_images
 }
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
