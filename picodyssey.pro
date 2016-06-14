@@ -32,3 +32,6 @@ DISTFILES += \
     android/gradlew.bat
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
+# thirdparty
+include(3rdparty/o2/src/src.pri)
