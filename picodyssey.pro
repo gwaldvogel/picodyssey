@@ -3,7 +3,12 @@ TEMPLATE = app
 QT += qml quick
 CONFIG += c++11
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    bl/cloudconnection/CloudConnection.cpp \
+    bl/cloudconnection/CloudConfig.cpp
+
+INCLUDEPATH += bl \
+               bl/cloudconnection
 
 RESOURCES += ui/qml.qrc
 
@@ -32,3 +37,7 @@ DISTFILES += \
     android/gradlew.bat
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
+HEADERS += \
+    bl/cloudconnection/CloudConnection.h \
+    bl/cloudconnection/CloudConfig.h
