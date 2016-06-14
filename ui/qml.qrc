@@ -3,7 +3,6 @@
         <file>qml/SidebarMenu.qml</file>
         <file>qml/MenuBar.qml</file>
         <file>qml/Main.qml</file>
-        <file>fonts/fontawesome-webfont.ttf</file>
         <file>qml/FontAwesomeIcon.qml</file>
         <file>res/images/dummyMap.png</file>
     </qresource>
