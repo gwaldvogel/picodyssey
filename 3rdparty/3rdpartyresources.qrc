@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/3rdparty">
+        <file>fontawesome/white/svg/bars.svg</file>
+    </qresource>
+</RCC>

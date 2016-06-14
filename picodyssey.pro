@@ -1,11 +1,12 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += qml quick svg
 CONFIG += c++11
 
 SOURCES += main.cpp
 
-RESOURCES += ui/qml.qrc
+RESOURCES += ui/qml.qrc \
+            3rdparty/3rdpartyresources.qrc
 
 ios {
     QMAKE_INFO_PLIST = ios/Info.plist

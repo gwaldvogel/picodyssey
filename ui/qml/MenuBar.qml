@@ -24,8 +24,8 @@ Rectangle {
     FontAwesomeIcon {
       anchors.fill: parent
       iconSize: 5
-      iconName: "\uf0c9"
-      iconColor: "#51586a"
+      iconName: "bars"
+//      iconColor: "#51586a"
       iconBorder: true
       backgroundColor: "#252830"
     }

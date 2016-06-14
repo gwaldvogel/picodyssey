@@ -1,3 +1,6 @@
 [submodule "3rdparty/o2"]
 	path = 3rdparty/o2
 	url = git@github.com:pipacs/o2.git
+[submodule "3rdparty/fontawesome"]
+	path = 3rdparty/fontawesome
+	url = git@github.com:encharm/Font-Awesome-SVG-PNG.git
