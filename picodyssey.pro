@@ -3,7 +3,12 @@ TEMPLATE = app
 QT += qml quick svg
 CONFIG += c++11
 
-SOURCES += main.cpp
+SOURCES += src/main.cpp \
+    src/bl/cloudconnection/CloudConnection.cpp \
+    src/bl/cloudconnection/CloudConfig.cpp
+
+INCLUDEPATH += src/bl \
+               src/bl/cloudconnection
 
 RESOURCES += ui/qml.qrc \
             3rdparty/3rdpartyresources.qrc
@@ -33,6 +38,10 @@ DISTFILES += \
     android/gradlew.bat
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
+HEADERS += \
+    src/bl/cloudconnection/CloudConnection.h \
+    src/bl/cloudconnection/CloudConfig.h
 
 # thirdparty
 include(3rdparty/o2/src/src.pri)
