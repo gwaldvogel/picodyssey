@@ -3,12 +3,12 @@ TEMPLATE = app
 QT += qml quick
 CONFIG += c++11
 
-SOURCES += main.cpp \
-    bl/cloudconnection/CloudConnection.cpp \
-    bl/cloudconnection/CloudConfig.cpp
+SOURCES += src/main.cpp \
+    src/bl/cloudconnection/CloudConnection.cpp \
+    src/bl/cloudconnection/CloudConfig.cpp
 
-INCLUDEPATH += bl \
-               bl/cloudconnection
+INCLUDEPATH += src/bl \
+               src/bl/cloudconnection
 
 RESOURCES += ui/qml.qrc
 
@@ -39,5 +39,5 @@ DISTFILES += \
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 HEADERS += \
-    bl/cloudconnection/CloudConnection.h \
-    bl/cloudconnection/CloudConfig.h
+    src/bl/cloudconnection/CloudConnection.h \
+    src/bl/cloudconnection/CloudConfig.h
