@@ -1,7 +1,7 @@
 #ifndef CLOUDCONNECTION_H
 #define CLOUDCONNECTION_H
 
-#include <bl/cloudconnection/CloudConfig.h>
+#include <src/bl/cloudconnection/CloudConfig.h>
 
 #include <QObject>
 
