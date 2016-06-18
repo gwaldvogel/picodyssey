@@ -12,13 +12,13 @@ class PlacesModel : public QObject
 public:
   PlacesModel(QObject* pParent = 0);
   void appendToList(Place* place);
-  QList getList();
+  QList<Place> getList();
 
 signals:
   void listChanged();
 
 private:
-  Qlist m_list;
+  QList<Place> m_list;
 };
 
 #endif // PLACESMODEL_H
