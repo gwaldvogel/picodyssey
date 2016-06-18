@@ -16,6 +16,7 @@ public:
   Place(QObject *pParent, QString name, QGeoCoordinate geoCoordinate, QUrl image, QUrl thumbnail, QString description, QString city = "freiburg");
   Place(QObject *pParent, QUuid placeId, QString name, QDate date, QGeoCoordinate geoCoordinate, QUrl image, QUrl thumbnail, QString description, QString city = "freiburg");
   static Place* fromJson(QJsonDocument jsonDoc, QObject* pParent = 0);
+  QJsonDocument toJson();
 
 private:
   QUuid m_placeId;

@@ -33,7 +33,7 @@ Place* Place::fromJson(QJsonDocument jsonDoc, QObject* pParent)
   {
     QJsonObject jsonObj = jsonDoc.object();
     return new Place(pParent,
-                     jsonObj["placeId"].toString(),
+                     QUuid(jsonObj["placeId"].toString()),
                      jsonObj["name"].toString(),
                      QDateTime::fromMSecsSinceEpoch(jsonObj["date"].toInt() * 1000).date(),
                      QGeoCoordinate(jsonObj["geoN"].toDouble(), jsonObj["geoE"].toDouble()),
@@ -42,6 +42,21 @@ Place* Place::fromJson(QJsonDocument jsonDoc, QObject* pParent)
                      jsonObj["description"].toString(),
                      jsonObj["city"].toString());
   }
+}
+
+QJsonDocument Place::toJson()
+{
+  QJsonObject jsonObj;
+  jsonObj.insert("placeId", m_placeId.toString().replace("{", "").replace("}", ""));
+  jsonObj.insert("name", m_name);
+  jsonObj.insert("date", (m_date.toMSecsSinceEpoch() / 1000));
+  jsonObj.insert("geoN", m_geoCoordinate.longitude());
+  jsonObj.insert("geoE", m_geoCoordinate.latitude());
+  jsonObj.insert("image", m_image.toString());
+  jsonObj.insert("thumbnail", m_thumbnail.toString());
+  jsonObj.insert("description", m_description);
+  jsonObj.insert("city", "Freiburg");
+  return QJsonDocument(jsonObj);
 }
 
 
