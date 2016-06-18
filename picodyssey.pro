@@ -1,12 +1,13 @@
 TEMPLATE = app
 
-QT += qml quick svg
+QT += qml quick svg positioning
 CONFIG += c++11
 
 SOURCES += src/main.cpp \
     src/bl/cloudconnection/CloudConnection.cpp \
     src/bl/cloudconnection/CloudConfig.cpp \
-    src/bl/MainApplication.cpp
+    src/bl/MainApplication.cpp \
+    src/bl/Place.cpp
 
 INCLUDEPATH += src/bl \
                src/bl/cloudconnection
@@ -43,7 +44,8 @@ ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 HEADERS += \
     src/bl/cloudconnection/CloudConnection.h \
     src/bl/cloudconnection/CloudConfig.h \
-    src/bl/MainApplication.h
+    src/bl/MainApplication.h \
+    src/bl/Place.h
 
 # thirdparty
 include(3rdparty/o2/src/src.pri)
