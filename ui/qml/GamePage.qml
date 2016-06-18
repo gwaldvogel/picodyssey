@@ -23,6 +23,22 @@ Item {
     }
 
     gesture.enabled: true
+
+    Marker {
+      id: marker
+      coordinate { // carl schurz haus
+        latitude: 47.99713
+        longitude: 7.843844
+      }
+      visible: false
+    }
+    MouseArea {
+      anchors.fill: parent
+      onClicked: {
+        marker.coordinate = map.toCoordinate(Qt.point(mouse.x, mouse.y), true);
+        marker.visible = true
+      }
+    }
   }
 
   Rectangle {
@@ -41,29 +57,29 @@ Item {
       anchors.top: parent.top
       anchors.bottom: parent.bottom
       anchors.left: parent.left
+      width: 0
       Behavior on width {
         PropertyAnimation {
           properties: "width"
-          duration: 3000
+          duration: 30000
           easing.type: Easing.Linear
         }
-      }
-      Component.onCompleted: {
-        loadingBarInner.width = parent.width;
-        timer.start();
       }
     }
   }
 
+  Component.onCompleted: {
+    loadingBarInner.width = parent.width;
+    timer.start();
+  }
+
   Timer {
     id: timer
-    interval: 3000
-    repeat: true
+    interval: 30000
+    repeat: false
     onTriggered: {
-      if(loadingBarInner.width == 0)
-        loadingBarInner.width = parent.width
-      else
-        loadingBarInner.width = 0;
+      console.log("time is over");
+      pageStack.push("qrc:/qml/ResultPage.qml");
     }
   }
 
@@ -75,18 +91,27 @@ Item {
     anchors.bottom: parent.bottom
 
     Text {
-
       anchors.centerIn: parent
       width: parent.width - 2 * parent.height
       height: parent.height
 
       text: "Lock in"
-
       color: "#51586a"
-
       font.pointSize: 20
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter
+    }
+
+    MouseArea {
+      anchors.fill: parent
+      onClicked: {
+        if(marker.visible)
+        {
+          console.log("locked in");
+          pageStack.push("qrc:/qml/ResultPage.qml");
+          timer.stop();
+        }
+      }
     }
   }
 }

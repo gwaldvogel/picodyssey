@@ -4,8 +4,8 @@
 
 MainApplication::MainApplication(QQmlApplicationEngine* pEngine, QObject *pParent)
   : QObject(pParent)
-  , m_pEngine(pEngine)
   , m_bLoggedIn(false)
+  , m_pEngine(pEngine)
 //  , m_pOAuthHandlerTwitter(new OAuthHandlerFacebook(this))
 {
   initUiConnections();
