@@ -9,5 +9,10 @@
         <file>qml/TextInputField.qml</file>
         <file>res/images/LoginScreen.png</file>
         <file>qml/GamePage.qml</file>
+        <file>qml/Camera.qml</file>
+        <file>qml/Marker.qml</file>
+        <file>res/images/map-marker.svg</file>
+        <file>qml/ResultPage.qml</file>
+        <file>res/images/map-marker-result.svg</file>
     </qresource>
 </RCC>

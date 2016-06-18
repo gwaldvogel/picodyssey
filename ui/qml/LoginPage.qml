@@ -61,7 +61,7 @@ Image {
       MouseArea {
         anchors.fill: parent
         onClicked: {
-          if(username.text == "admin" && password.text == "admin")
+//          if(username.text == "admin" && password.text == "admin")
           {
             app.loggedIn = true;
             pageStack.pop();
