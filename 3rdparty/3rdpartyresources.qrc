@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/3rdparty">
         <file>fontawesome/white/svg/bars.svg</file>
+        <file>fontawesome/white/svg/camera-retro.svg</file>
+        <file>fontawesome/white/svg/camera.svg</file>
     </qresource>
 </RCC>

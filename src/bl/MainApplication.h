@@ -21,6 +21,7 @@ public:
   void setCurrentPlace(Place* place);
   Place* getCurrentPlace();
 
+Q_INVOKABLE void uploadPicture(QString image);
 
 signals:
   void loggedInChanged(bool loggedIn);
