@@ -2,9 +2,12 @@
 #include "CloudConfig.h"
 
 #include <src/bl/MainApplication.h>
+#include <Place.h>
+#include <PlacesModel.h>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QUuid>
+
 
 int main(int argc, char *argv[])
 {

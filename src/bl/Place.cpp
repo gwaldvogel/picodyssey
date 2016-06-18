@@ -1,5 +1,8 @@
 #include "Place.h"
 
+QString const Place::kKeyType = "type";
+QString const Place::kValType = "place";
+
 Place::Place(QObject *pParent, QString name, QGeoCoordinate geoCoordinate, QUrl image, QUrl thumbnail, QString description, QString city)
   : QObject(pParent)
   , m_placeId(QUuid::createUuid())
@@ -27,13 +30,27 @@ Place::Place(QObject* pParent, QUuid placeId, QString name, QDate date, QGeoCoor
 {
 
 }
+/*
+Place::Place(const Place &other)
+{
+  QUuid           m_placeId = other.;
+  QString         m_name;
+  QDateTime       m_date;
+  QGeoCoordinate  m_geoCoordinate;
+  QUrl            m_image;
+  QUrl            m_thumbnail;
+  QString         m_description;
+  QString         m_city;
+  QString         m_type = "place";
+}*/
 
 Place* Place::fromJson(QJsonDocument jsonDoc, QObject* pParent)
 {
+  Place* retVal = nullptr;
   if(jsonDoc.isObject() && !jsonDoc.isNull() && !jsonDoc.isEmpty())
   {
     QJsonObject jsonObj = jsonDoc.object();
-    return new Place(pParent,
+    retVal = new Place(pParent,
                      QUuid(jsonObj["placeId"].toString()),
                      jsonObj["name"].toString(),
                      QDateTime::fromMSecsSinceEpoch(jsonObj["date"].toInt() * 1000).date(),
@@ -43,6 +60,7 @@ Place* Place::fromJson(QJsonDocument jsonDoc, QObject* pParent)
                      jsonObj["description"].toString(),
                      jsonObj["city"].toString());
   }
+  return retVal;
 }
 
 QJsonDocument Place::toJson()

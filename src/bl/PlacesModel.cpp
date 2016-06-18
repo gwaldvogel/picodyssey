@@ -6,7 +6,21 @@ PlacesModel::PlacesModel(QObject* pParent)
 
 }
 
-void PlacesModel::appendToList(Place* place)
+PlacesModel::PlacesModel(QJsonDocument jsonDoc, QObject* pParent)
+  : QObject(pParent)
 {
-
+  if(jsonDoc.isArray() && !jsonDoc.isNull() && !jsonDoc.isEmpty())
+  {
+    QJsonArray jsonArray = jsonDoc.array();
+    for(int32_t i = 0; i < jsonArray.size(); ++i)
+    {
+      m_list.append(Place::fromJson(QJsonDocument(jsonArray[i].toObject())));
+    }
+  }
 }
+
+QList<Place*>& PlacesModel::getList()
+{
+  return m_list;
+}
+

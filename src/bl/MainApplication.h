@@ -7,7 +7,6 @@
 class MainApplication : public QObject
 {
   Q_OBJECT
-
   Q_PROPERTY(bool loggedIn READ getLoggedIn WRITE setLoggedIn NOTIFY loggedInChanged)
 
 public:

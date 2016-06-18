@@ -112,12 +112,13 @@ void CloudConfig::replyFinished(QNetworkReply* reply)
     if (QString::compare(type, Place::kValType, Qt::CaseSensitive))
     {
       Place* place = Place::fromJson(jsonDoc);
-      // TODO emit
+
+
     }
     else if (QString::compare(type, User::kValType, Qt::CaseSensitive))
     {
       User* user = User::fromJson(jsonDoc);
-      // TODO emit
+
     }
     else
     {

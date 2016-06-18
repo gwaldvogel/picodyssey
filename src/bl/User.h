@@ -13,8 +13,8 @@ class User : public QObject
 {
   Q_OBJECT
 public:
-  static QString const kKeyType = "type";
-  static QString const kValType = "user";
+  static QString const kKeyType;
+  static QString const kValType;
 
   User(QObject* pParent, QUuid userId, QString name, uint8_t numberOfPlaces);
   static User* fromJson(QJsonDocument jsonDoc, QObject* pParent = 0);
