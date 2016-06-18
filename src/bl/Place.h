@@ -1,26 +1,31 @@
 #ifndef PLACE_H
 #define PLACE_H
 
-#include <QObject>
-#include <QUuid>
-#include <QUrl>
 #include <QDateTime>
-#include <QGeoLocation>
+#include <QGeoCoordinate>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QObject>
+#include <QUrl>
+#include <QUuid>
 
 class Place : public QObject
 {
   Q_OBJECT
 public:
-  Place(QObject *pParent, QString name, QGeoLocation geoLocation, QUrl fullImage, QUrl thumbnailImage, QString description, QString city = "freiburg");
-  Place(QObject *pParent, QUuid uuid, QString name, QDateTime dateTime, QGeoLocation geoLocation, QUrl fullImage, QUrl thumbnailImage, QString description, QString city = "freiburg");
+  Place(QObject *pParent, QString name, QGeoCoordinate geoCoordinate, QUrl image, QUrl thumbnail, QString description, QString city = "freiburg");
+  Place(QObject *pParent, QUuid placeId, QString name, QDate date, QGeoCoordinate geoCoordinate, QUrl image, QUrl thumbnail, QString description, QString city = "freiburg");
+  static Place* fromJson(QJsonDocument jsonDoc, QObject* pParent = 0);
+  QJsonDocument toJson();
 
 private:
-  QUuid m_uuid;
+  QUuid m_placeId;
   QString m_name;
-  QDateTime m_dateTime;
-  QGeoLocation m_geoLocation;
-  QUrl m_fullImage;
-  QUrl m_thumbnailImage;
+  QDateTime m_date;
+  QGeoCoordinate m_geoCoordinate;
+  QUrl m_image;
+  QUrl m_thumbnail;
+
   QString m_description;
   QString m_city;
   QString m_type = "place";
