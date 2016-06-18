@@ -5,7 +5,8 @@ CONFIG += c++11
 
 SOURCES += src/main.cpp \
     src/bl/cloudconnection/CloudConnection.cpp \
-    src/bl/cloudconnection/CloudConfig.cpp
+    src/bl/cloudconnection/CloudConfig.cpp \
+    src/bl/MainApplication.cpp
 
 INCLUDEPATH += src/bl \
                src/bl/cloudconnection
@@ -41,7 +42,8 @@ ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 HEADERS += \
     src/bl/cloudconnection/CloudConnection.h \
-    src/bl/cloudconnection/CloudConfig.h
+    src/bl/cloudconnection/CloudConfig.h \
+    src/bl/MainApplication.h
 
 # thirdparty
 include(3rdparty/o2/src/src.pri)
