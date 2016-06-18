@@ -45,7 +45,7 @@ Rectangle {
     height: Screen.pixelDensity * 10
 
     text: qsTr("Menu")
-    color: "#cccccc"
+    color: "#1ca8dd"
     font.pointSize: 20
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
@@ -59,13 +59,15 @@ Rectangle {
     anchors.top: centerText.bottom
 
     delegate: Rectangle {
-      color: (index % 2 == 0) ? "#1ca8dd" : "#1bc98e"
+      color: (index % 2 == 0) ? "#494E5E" : "#4E5261"
       width: parent.width
       height: 10 * Screen.pixelDensity
 
       Text {
         text: menuText
         anchors.centerIn: parent
+        color: "#cccccc"
+        font.pointSize: Screen.pixelDensity * 3
       }
 
       MouseArea {

@@ -10,7 +10,7 @@ Item {
     }
 
     width: parent.width
-    height: parent.height / 2
+    height: parent.height - resultText.height * 3
 
     zoomLevel: resultMap.maximumZoomLevel - 3
 
@@ -41,13 +41,13 @@ Item {
     Marker {
       id: actualMarker
       actual: true
-      coordinate { // carl schurz haus
-        latitude: 47.99813
-        longitude: 7.844944
-      }
+      coordinate: app.currentPlace.geoCoordinates
     }
   }
+
   Text {
+    id: resultText
+
     anchors.top: resultMap.bottom
     anchors.topMargin: Screen.pixelDensity * 5
     width: parent.width

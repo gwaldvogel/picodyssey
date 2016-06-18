@@ -96,7 +96,7 @@ Item {
       height: parent.height
 
       text: "Lock in"
-      color: "#51586a"
+      color: marker.visible ? "#51586a" : "#C0C4CF"
       font.pointSize: 20
       horizontalAlignment: Text.AlignHCenter
       verticalAlignment: Text.AlignVCenter

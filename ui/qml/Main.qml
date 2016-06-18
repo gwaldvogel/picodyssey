@@ -46,6 +46,8 @@ Window {
     ListElement { menuText: QT_TR_NOOP("About"); actionId: "about" }
   }
 
+  Component.onCompleted: console.log("asd: ", app.currentPlace, app.currentPlace)
+
   Connections {
     target: fullscreenMenu
     onItemClicked: {
