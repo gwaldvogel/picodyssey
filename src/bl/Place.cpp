@@ -43,3 +43,5 @@ Place* Place::fromJson(QJsonDocument jsonDoc, QObject* pParent)
                      jsonObj["city"].toString());
   }
 }
+
+
