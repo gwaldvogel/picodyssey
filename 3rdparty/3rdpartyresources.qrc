@@ -3,5 +3,7 @@
         <file>fontawesome/white/svg/bars.svg</file>
         <file>fontawesome/black/svg/map-marker.svg</file>
         <file>fontawesome/white/svg/map-marker.svg</file>
+        <file>fontawesome/white/svg/camera-retro.svg</file>
+        <file>fontawesome/white/svg/camera.svg</file>
     </qresource>
 </RCC>

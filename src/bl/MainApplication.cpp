@@ -1,5 +1,6 @@
 #include "MainApplication.h"
 
+#include <QDebug>
 #include <QQmlContext>
 
 MainApplication::MainApplication(QQmlApplicationEngine* pEngine, QObject *pParent)
@@ -42,6 +43,11 @@ void MainApplication::setCurrentPlace(Place* place)
 Place*MainApplication::getCurrentPlace()
 {
   return m_pCurrentPlace;
+}
+
+void MainApplication::uploadPicture(QString image)
+{
+  qDebug() << "Fancy upload shice...";
 }
 
 void MainApplication::initUiConnections()
