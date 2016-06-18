@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/3rdparty">
         <file>fontawesome/white/svg/bars.svg</file>
+        <file>fontawesome/black/svg/map-marker.svg</file>
+        <file>fontawesome/white/svg/map-marker.svg</file>
     </qresource>
 </RCC>
