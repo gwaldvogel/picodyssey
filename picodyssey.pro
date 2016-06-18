@@ -7,7 +7,9 @@ SOURCES += src/main.cpp \
     src/bl/cloudconnection/CloudConnection.cpp \
     src/bl/cloudconnection/CloudConfig.cpp \
     src/bl/MainApplication.cpp \
-    src/bl/Place.cpp
+    src/bl/Place.cpp \
+    src/bl/User.cpp \
+    src/bl/PlacesModel.cpp
 
 INCLUDEPATH += src/bl \
                src/bl/cloudconnection
@@ -45,7 +47,9 @@ HEADERS += \
     src/bl/cloudconnection/CloudConnection.h \
     src/bl/cloudconnection/CloudConfig.h \
     src/bl/MainApplication.h \
-    src/bl/Place.h
+    src/bl/Place.h \
+    src/bl/User.h \
+    src/bl/PlacesModel.h
 
 # thirdparty
 include(3rdparty/o2/src/src.pri)

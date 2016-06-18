@@ -11,6 +11,7 @@ Place::Place(QObject *pParent, QString name, QGeoCoordinate geoCoordinate, QUrl 
   , m_description(description)
   , m_city(city)
 {
+
 }
 
 Place::Place(QObject* pParent, QUuid placeId, QString name, QDate date, QGeoCoordinate geoCoordinate, QUrl image, QUrl thumbnail, QString description, QString city)
@@ -56,6 +57,7 @@ QJsonDocument Place::toJson()
   jsonObj.insert("thumbnail", m_thumbnail.toString());
   jsonObj.insert("description", m_description);
   jsonObj.insert("city", "Freiburg");
+  jsonObj.insert("type", "place");
   return QJsonDocument(jsonObj);
 }
 
