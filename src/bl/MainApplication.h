@@ -3,7 +3,6 @@
 
 #include <QObject>
 #include <QQmlApplicationEngine>
-#include <OAuthHandlerFacebook.h>
 
 class MainApplication : public QObject
 {
