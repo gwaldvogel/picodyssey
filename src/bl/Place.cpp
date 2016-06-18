@@ -30,10 +30,11 @@ Place::Place(QObject* pParent, QUuid placeId, QString name, QDate date, QGeoCoor
 
 Place* Place::fromJson(QJsonDocument jsonDoc, QObject* pParent)
 {
+  Place* retVal = nullptr;
   if(jsonDoc.isObject() && !jsonDoc.isNull() && !jsonDoc.isEmpty())
   {
     QJsonObject jsonObj = jsonDoc.object();
-    return new Place(pParent,
+    retVal = new Place(pParent,
                      QUuid(jsonObj["placeId"].toString()),
                      jsonObj["name"].toString(),
                      QDateTime::fromMSecsSinceEpoch(jsonObj["date"].toInt() * 1000).date(),
@@ -43,6 +44,7 @@ Place* Place::fromJson(QJsonDocument jsonDoc, QObject* pParent)
                      jsonObj["description"].toString(),
                      jsonObj["city"].toString());
   }
+  return retVal;
 }
 
 QJsonDocument Place::toJson()
