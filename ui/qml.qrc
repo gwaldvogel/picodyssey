@@ -5,5 +5,9 @@
         <file>qml/Main.qml</file>
         <file>qml/FontAwesomeIcon.qml</file>
         <file>res/images/dummyMap.png</file>
+        <file>qml/LoginPage.qml</file>
+        <file>qml/TextInputField.qml</file>
+        <file>res/images/LoginScreen.png</file>
+        <file>qml/GamePage.qml</file>
     </qresource>
 </RCC>
