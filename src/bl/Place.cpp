@@ -54,14 +54,14 @@ Place* Place::fromJson(QJsonDocument jsonDoc, QObject* pParent)
 
 void Place::base64ToImage(QImage& imagePng, QByteArray const& base64Image)
 {
-  imagePng.loadFromData(QByteArray::fromBase64(base64Image), "PNG");
+  imagePng.loadFromData(QByteArray::fromBase64(base64Image), "JPG");
 }
 
 void Place::imageTo64Base(QByteArray& base64Image, QImage const& imagePng)
 {
   QBuffer buffer(&base64Image);
   buffer.open(QIODevice::WriteOnly);
-  imagePng.save(&buffer, "PNG");
+  imagePng.save(&buffer, "JPG");
   base64Image = base64Image.toBase64();
 }
 
