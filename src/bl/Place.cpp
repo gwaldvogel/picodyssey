@@ -57,7 +57,7 @@ QJsonDocument Place::toJson()
   jsonObj.insert("thumbnail", m_thumbnail.toString());
   jsonObj.insert("description", m_description);
   jsonObj.insert("city", "Freiburg");
-  jsonObj.insert("type", "place");
+  jsonObj.insert(kKeyType, kValType);
   return QJsonDocument(jsonObj);
 }
 

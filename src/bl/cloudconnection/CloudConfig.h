@@ -3,6 +3,11 @@
 
 #include <QObject>
 #include <QString>
+#include <QUuid>
+#include <QUrl>
+#include <QNetworkAccessManager>
+
+#include <memory>
 
 namespace cloudconnection
 {
@@ -67,15 +72,33 @@ namespace cloudconnection
      */
     void setUseSsl(bool useSsl);
 
+    void getPlace(QUuid const& uuid);
+    void getUser(QUuid const& uuid);
+
+    void getPlaces();
+    void getUserPlaces(QUuid const& uuid);
+
+  public slots:
+    void replyFinished(QNetworkReply* reply);
+
   signals:
     void cloudAddressChanged();
     void cloudPortChanged();
     void useSslChanged();
 
   private:
-    QString m_qstrCloudAddress;
-    int m_cloudPort;
+
+    QString const kRequestPlace = "/getPlace/";
+    QString const kRequestUser = "/getUser/";
+
+    QString const kRequestPlaces = "/getPlaces/";
+    QString const kRequestUserPlaces = "/getUserPlaces/";
+
+    std::unique_ptr<QNetworkAccessManager> m_networkManager;
+    QUrl m_cloudUrl;
     bool m_bUseSsl;
+
+    void sendGetRequest(QString const& requestPath);
   };
 }
 

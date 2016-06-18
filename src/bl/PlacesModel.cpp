@@ -2,7 +2,6 @@
 
 PlacesModel::PlacesModel(QObject* pParent)
   : QObject(pParent)
-  , m_list()
 {
 
 }

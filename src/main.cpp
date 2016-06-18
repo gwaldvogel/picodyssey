@@ -1,6 +1,10 @@
+
+#include "CloudConfig.h"
+
 #include <src/bl/MainApplication.h>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QUuid>
 
 int main(int argc, char *argv[])
 {
@@ -9,6 +13,10 @@ int main(int argc, char *argv[])
   QQmlApplicationEngine engine;
   MainApplication mainApplication(&engine, &app);
   mainApplication.load();
+
+  cloudconnection::CloudConfig cconfig(nullptr, "http://192.168.0.104", 80);
+  QUuid uuid("0815");
+  cconfig.getPlace(uuid);
 
   return app.exec();
 }

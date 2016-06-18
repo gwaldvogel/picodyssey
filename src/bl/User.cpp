@@ -28,6 +28,6 @@ QJsonDocument User::toJson()
   jsonObj.insert("UserId", m_userId.toString().replace("{", "").replace("}", ""));
   jsonObj.insert("name", m_name);
   jsonObj.insert("numberOfPlaces", m_numberOfPlaces);
-  jsonObj.insert("type", "user");
+  jsonObj.insert(kKeyType, kValType);
   return QJsonDocument(jsonObj);
 }

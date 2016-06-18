@@ -8,11 +8,11 @@
 class PlacesModel : public QObject
 {
   Q_OBJECT
-  Q_PROPERTY(QList list READ getList NOTIFY listChanged)
+
 public:
   PlacesModel(QObject* pParent = 0);
-  void appendToList(Place* place);
-  QList<Place> getList();
+
+  QList<Place>& getList();
 
 signals:
   void listChanged();
