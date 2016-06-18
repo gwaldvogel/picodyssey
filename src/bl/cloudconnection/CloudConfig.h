@@ -72,7 +72,7 @@ namespace cloudconnection
      */
     void setUseSsl(bool useSsl);
 
-    void getPlace();
+    void getRandPlace();
     void getPlace(QUuid const& uuid);
     void getUser(QUuid const& uuid);
 
@@ -89,6 +89,7 @@ namespace cloudconnection
 
   private:
 
+    QString const kRequestRandPlace = "/getRandPlace";
     QString const kRequestPlace = "/getPlace/";
     QString const kRequestUser = "/getUser/";
 

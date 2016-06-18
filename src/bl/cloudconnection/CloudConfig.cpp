@@ -79,9 +79,9 @@ void CloudConfig::getUser(QUuid const& uuid)
   sendGetRequest(kRequestUser + uuid.toString());
 }
 
-void CloudConfig::getPlace()
+void CloudConfig::getRandPlace()
 {
-  sendGetRequest(kRequestPlace);
+  sendGetRequest(kRequestRandPlace);
 }
 
 void CloudConfig::getPlaces()
