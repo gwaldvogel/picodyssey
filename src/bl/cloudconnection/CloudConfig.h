@@ -72,6 +72,7 @@ namespace cloudconnection
      */
     void setUseSsl(bool useSsl);
 
+    void getPlace();
     void getPlace(QUuid const& uuid);
     void getUser(QUuid const& uuid);
 
@@ -97,6 +98,8 @@ namespace cloudconnection
     std::unique_ptr<QNetworkAccessManager> m_networkManager;
     QUrl m_cloudUrl;
     bool m_bUseSsl;
+
+    QObject* m_parent;
 
     void sendGetRequest(QString const& requestPath);
   };

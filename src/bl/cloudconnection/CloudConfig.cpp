@@ -2,6 +2,7 @@
 
 #include "Place.h"
 #include "User.h"
+#include "MainApplication.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
@@ -17,6 +18,7 @@ using namespace cloudconnection;
 
 CloudConfig::CloudConfig(QObject *parent, QString cloudAddress, int cloudPort, bool useSsl)
   : QObject(parent)
+  , m_parent(parent)
   , m_cloudUrl(cloudAddress)
   , m_bUseSsl(useSsl)
 {
@@ -68,12 +70,18 @@ void CloudConfig::setUseSsl(bool useSsl)
 
 void CloudConfig::getPlace(QUuid const& uuid)
 {
-  sendGetRequest(kRequestPlace + uuid.toString());
+  //sendGetRequest(kRequestPlace + uuid.toString());
+  sendGetRequest(kRequestPlace + "0815");
 }
 
 void CloudConfig::getUser(QUuid const& uuid)
 {
   sendGetRequest(kRequestUser + uuid.toString());
+}
+
+void CloudConfig::getPlace()
+{
+  sendGetRequest(kRequestPlace);
 }
 
 void CloudConfig::getPlaces()
@@ -112,7 +120,8 @@ void CloudConfig::replyFinished(QNetworkReply* reply)
     if (QString::compare(type, Place::kValType, Qt::CaseSensitive))
     {
       Place* place = Place::fromJson(jsonDoc);
-
+      MainApplication* application = dynamic_cast<MainApplication*>(m_parent);
+      application->setCurrentPlace(place);
 
     }
     else if (QString::compare(type, User::kValType, Qt::CaseSensitive))

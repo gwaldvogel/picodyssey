@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 
   cloudconnection::CloudConfig cconfig(nullptr, "http://192.168.0.104", 80);
   QUuid uuid("0815");
-  cconfig.getPlace(uuid);
+  cconfig.getPlace();
 
   return app.exec();
 }

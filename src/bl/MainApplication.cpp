@@ -30,8 +30,23 @@ void MainApplication::setLoggedIn(bool loggedIn)
   }
 }
 
+void MainApplication::setCurrentPlace(Place* place)
+{
+  if(m_pCurrentPlace != place)
+  {
+    m_pCurrentPlace = place;
+    emit currentPlaceChanged();
+  }
+}
+
+Place*MainApplication::getCurrentPlace()
+{
+  return m_pCurrentPlace;
+}
+
 void MainApplication::initUiConnections()
 {
   m_pEngine->rootContext()->setContextProperty("app", this);
 //  m_pEngine->rootContext()->setContextProperty("OAuthHandlerTwitter", m_pOAuthHandlerTwitter);
 }
+
