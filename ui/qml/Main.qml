@@ -1,5 +1,6 @@
 import QtQuick 2.5
 import QtQuick.Window 2.2
+import QtQuick.Controls 1.4
 
 Window {
   id: mainWindow
@@ -11,129 +12,181 @@ Window {
 
   color: "#252830"
 
-  FontLoader {
-    source: "qrc:/fonts/fontawesome-webfont.ttf"
-  }
-
-  MenuBar {
-    id: menuBar
-
-    centerText: qsTr("Pic Odyssey")
-
-    height: Screen.pixelDensity * 10
-    width: parent.width
-    anchors.top: mainWindow.top
-    anchors.left: sidebarMenu.right
-
-    onLeftButtonClicked: sidebarMenu.toggleSidebar();
+  StackView {
+    id: pageStack
+    anchors.fill: parent
+    initialItem: fullscreenMenu
+    Component.onCompleted: {
+      if(!app.loggedIn)
+      {
+        console.log("not logged in!");
+        pageStack.push("qrc:/qml/LoginPage.qml");
+      }
+      else
+      {
+        console.log("logged in");
+      }
+    }
   }
 
   SidebarMenu {
-    id: sidebarMenu
+    id: fullscreenMenu
+    model: mainMenuModel
+  }
 
-    height: parent.height
-    width: parent.width * 0.8
-    x: 0 - parent.width * 0.8
+  //  LoginPage {
+  //    anchors.fill: parent
+  //  }
 
-    model: ListModel {
-      ListElement { menuText: QT_TR_NOOP("Play"); actionId: "play" }
-      ListElement { menuText: QT_TR_NOOP("Take image"); actionId: "camera" }
-      ListElement { menuText: QT_TR_NOOP("Highscores"); actionId: "highscore" }
-      ListElement { menuText: QT_TR_NOOP("About"); actionId: "about" }
+  ListModel {
+    id: mainMenuModel
+    ListElement { menuText: QT_TR_NOOP("Play"); actionId: "play" }
+    ListElement { menuText: QT_TR_NOOP("Take image"); actionId: "camera" }
+    ListElement { menuText: QT_TR_NOOP("Highscores"); actionId: "highscore" }
+    ListElement { menuText: QT_TR_NOOP("About"); actionId: "about" }
+  }
+
+  Connections {
+    target: fullscreenMenu
+    onItemClicked: {
+      console.log(actionId + " clicked")
+      switch(actionId)
+      {
+      case "play":
+        pageStack.push("qrc:/qml/GamePage.qml");
+        break;
+      case "camera":
+        pageStack.push("qrc:/qml/Camera.qml");
+        break;
+      case "highscore":
+        pageStack.push("qrc:/qml/Highscore.qml");
+        break;
+      case "about":
+        pageStack.push("qrc:/qml/About.qml");
+        break;
+      }
     }
   }
 
-  Rectangle {
-    id: content
+  //  MenuBar {
+  //    id: menuBar
 
-    anchors.left: sidebarMenu.right
-    anchors.top: menuBar.bottom
-    width: parent.width
-    height: parent.height - menuBar.height
+  //    centerText: qsTr("Pic Odyssey")
 
-    color: "#252830"
+  //    height: Screen.pixelDensity * 10
+  //    width: parent.width
+  //    anchors.top: mainWindow.top
+  //    anchors.left: sidebarMenu.right
 
-    Image {
-      source: "qrc:/res/images/dummyMap.png"
-      width: parent.width
-      height: parent.height - loadingBarOuter.height - lockInButton.height + 1
-      fillMode: Image.PreserveAspectCrop
-    }
+  //    onLeftButtonClicked: sidebarMenu.toggleSidebar();
+  //  }
 
-    Rectangle {
-      id: loadingBarOuter
+  //  SidebarMenu {
+  //    id: sidebarMenu
 
-      color: "#1ca8dd"
-      anchors.bottom: lockInButton.top
-      height: Screen.pixelDensity * 2
-      width: parent.width
+  //    height: parent.height
+  //    width: parent.width * 0.8
+  //    x: 0 - parent.width * 0.8
 
-      Rectangle {
-        id: loadingBarInner
+  //    model: ListModel {
+  //      ListElement { menuText: QT_TR_NOOP("Play"); actionId: "play" }
+  //      ListElement { menuText: QT_TR_NOOP("Take image"); actionId: "camera" }
+  //      ListElement { menuText: QT_TR_NOOP("Highscores"); actionId: "highscore" }
+  //      ListElement { menuText: QT_TR_NOOP("About"); actionId: "about" }
+  //    }
+  //  }
 
-        color: "#1bc98e"
+  //  Rectangle {
+  //    id: content
 
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        Behavior on width {
-          PropertyAnimation {
-            properties: "width"
-            duration: 3000
-            easing.type: Easing.Linear
-          }
-        }
-        Component.onCompleted: {
-          loadingBarInner.width = parent.width;
-          timer.start();
-        }
-      }
-    }
+  //    anchors.left: sidebarMenu.right
+  //    anchors.top: menuBar.bottom
+  //    width: parent.width
+  //    height: parent.height - menuBar.height
 
-    Timer {
-      id: timer
-      interval: 3000
-      repeat: true
-      onTriggered: {
-        if(loadingBarInner.width == 0)
-          loadingBarInner.width = parent.width
-        else
-          loadingBarInner.width = 0;
-      }
-    }
+  //    color: "#252830"
 
-    Rectangle {
-      id: lockInButton
+  //    Image {
+  //      source: "qrc:/res/images/dummyMap.png"
+  //      width: parent.width
+  //      height: parent.height - loadingBarOuter.height - lockInButton.height + 1
+  //      fillMode: Image.PreserveAspectCrop
+  //    }
 
-      height: Screen.pixelDensity * 10
-      width: parent.width
-      anchors.bottom: parent.bottom
+  //    Rectangle {
+  //      id: loadingBarOuter
 
-      Text {
+  //      color: "#1ca8dd"
+  //      anchors.bottom: lockInButton.top
+  //      height: Screen.pixelDensity * 2
+  //      width: parent.width
 
-        anchors.centerIn: parent
-        width: parent.width - 2 * parent.height
-        height: parent.height
+  //      Rectangle {
+  //        id: loadingBarInner
 
-        text: "Lock in"
+  //        color: "#1bc98e"
 
-        color: "#51586a"
+  //        anchors.top: parent.top
+  //        anchors.bottom: parent.bottom
+  //        anchors.left: parent.left
+  //        Behavior on width {
+  //          PropertyAnimation {
+  //            properties: "width"
+  //            duration: 3000
+  //            easing.type: Easing.Linear
+  //          }
+  //        }
+  //        Component.onCompleted: {
+  //          loadingBarInner.width = parent.width;
+  //          timer.start();
+  //        }
+  //      }
+  //    }
 
-        font.pointSize: 20
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-      }
-    }
+  //    Timer {
+  //      id: timer
+  //      interval: 3000
+  //      repeat: true
+  //      onTriggered: {
+  //        if(loadingBarInner.width == 0)
+  //          loadingBarInner.width = parent.width
+  //        else
+  //          loadingBarInner.width = 0;
+  //      }
+  //    }
 
-  }
+  //    Rectangle {
+  //      id: lockInButton
 
-  // mousearea to disable sidebar
-  MouseArea {
-    enabled: sidebarMenu.isOpen
-    anchors.left: sidebarMenu.right
-    anchors.top: parent.top
-    anchors.right: parent.right
-    anchors.bottom: parent.bottom
-    onClicked: sidebarMenu.toggleSidebar()
-  }
+  //      height: Screen.pixelDensity * 10
+  //      width: parent.width
+  //      anchors.bottom: parent.bottom
+
+  //      Text {
+
+  //        anchors.centerIn: parent
+  //        width: parent.width - 2 * parent.height
+  //        height: parent.height
+
+  //        text: "Lock in"
+
+  //        color: "#51586a"
+
+  //        font.pointSize: 20
+  //        horizontalAlignment: Text.AlignHCenter
+  //        verticalAlignment: Text.AlignVCenter
+  //      }
+  //    }
+
+  //  }
+
+  //  // mousearea to disable sidebar
+  //  MouseArea {
+  //    enabled: sidebarMenu.isOpen
+  //    anchors.left: sidebarMenu.right
+  //    anchors.top: parent.top
+  //    anchors.right: parent.right
+  //    anchors.bottom: parent.bottom
+  //    onClicked: sidebarMenu.toggleSidebar()
+  //  }
 }

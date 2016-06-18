@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick svg positioning
+QT += qml quick svg positioning location
 CONFIG += c++11
 
 SOURCES += src/main.cpp \

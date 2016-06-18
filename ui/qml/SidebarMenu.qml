@@ -34,6 +34,8 @@ Rectangle {
     }
   }
 
+  signal itemClicked(string actionId);
+
   Text {
     id: centerText
 
@@ -62,8 +64,16 @@ Rectangle {
       height: 10 * Screen.pixelDensity
 
       Text {
-        text: menuText + " (" + actionId + ")"
+        text: menuText
         anchors.centerIn: parent
+      }
+
+      MouseArea {
+        anchors.fill: parent
+        onClicked: {
+          itemClicked(actionId);
+          console.log(actionId);
+        }
       }
     }
   }

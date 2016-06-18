@@ -16,6 +16,7 @@ Item {
     id: borderRect
 
     color: backgroundColor
+
     border.color: fontAwesomeIcon.darkMode ? "#000000" : "#ffffff"
     radius: 5
     anchors.centerIn: parent
