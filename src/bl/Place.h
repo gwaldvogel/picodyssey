@@ -19,7 +19,7 @@ class Place : public QObject
   Q_PROPERTY(QString name MEMBER m_name CONSTANT)
   Q_PROPERTY(QDateTime date MEMBER m_date CONSTANT)
   Q_PROPERTY(QGeoCoordinate geoCoordinates MEMBER m_geoCoordinate CONSTANT)
-  Q_PROPERTY(QString image MEMBER m_image CONSTANT)
+  Q_PROPERTY(QString image MEMBER m_image NOTIFY imageChanged)
   Q_PROPERTY(QUrl thumbnail MEMBER m_thumbnail CONSTANT)
   Q_PROPERTY(QString description MEMBER m_description CONSTANT)
   Q_PROPERTY(QString city MEMBER m_city CONSTANT)
@@ -36,6 +36,9 @@ public:
 
   static void base64ToImage(QImage& imagePng ,QByteArray const& base64Image);
   static void imageTo64Base(QByteArray& base64Image, QImage const& imagePng);
+
+signals:
+  void imageChanged();
 
 private:
   QUuid           m_placeId;

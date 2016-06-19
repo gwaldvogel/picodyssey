@@ -6,10 +6,8 @@
 MainApplication::MainApplication(QQmlApplicationEngine* pEngine, QObject *pParent)
   : QObject(pParent)
   , m_bLoggedIn(false)
-//  , m_lastMarkerCoordinates()
   , m_pEngine(pEngine)
   , cconfig(this, "http://192.168.2.192", 80)
-//  , m_pOAuthHandlerTwitter(new OAuthHandlerFacebook(this))
 {
   initUiConnections();
   cconfig.getRandPlace();
@@ -36,10 +34,14 @@ void MainApplication::setLoggedIn(bool loggedIn)
 
 void MainApplication::setCurrentPlace(Place* place)
 {
-  if(m_pCurrentPlace != place)
+  if(m_pCurrentPlace == nullptr)
   {
     m_pCurrentPlace = place;
     emit currentPlaceChanged();
+  }
+  else
+  {
+    m_pNextPlace = place;
   }
 }
 
@@ -53,19 +55,12 @@ void MainApplication::loadNewPlace()
   cconfig.getRandPlace();
 }
 
-//QGeoCoordinate MainApplication::getLastMarkerCoordinates()
-//{
-//  return m_lastMarkerCoordinates;
-//}
-
-//void MainApplication::setLastMarkerCoordinates(QGeoCoordinate marker)
-//{
-//  if(m_lastMarkerCoordinates != marker)
-//  {
-//    m_lastMarkerCoordinates = marker;
-//    emit lastMarkerCoordinatesChanged();
-//  }
-//}
+void MainApplication::nextPlace()
+{
+  m_pCurrentPlace = m_pNextPlace;
+  m_pNextPlace = nullptr;
+  emit currentPlaceChanged();
+}
 
 void MainApplication::uploadPicture(QString image)
 {
@@ -75,6 +70,6 @@ void MainApplication::uploadPicture(QString image)
 void MainApplication::initUiConnections()
 {
   m_pEngine->rootContext()->setContextProperty("app", this);
-//  m_pEngine->rootContext()->setContextProperty("OAuthHandlerTwitter", m_pOAuthHandlerTwitter);
+  //  m_pEngine->rootContext()->setContextProperty("OAuthHandlerTwitter", m_pOAuthHandlerTwitter);
 }
 

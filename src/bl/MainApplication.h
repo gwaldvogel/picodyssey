@@ -24,6 +24,7 @@ public:
   Place* getCurrentPlace();
 
   Q_INVOKABLE void loadNewPlace();
+  Q_INVOKABLE void nextPlace();
 
   cloudconnection::CloudConfig cconfig;
 
@@ -41,6 +42,7 @@ private:
   void initUiConnections();
   bool m_bLoggedIn;
   Place* m_pCurrentPlace;
+  Place* m_pNextPlace;
 //  QGeoCoordinate m_lastMarkerCoordinates;
 
   QQmlApplicationEngine* m_pEngine;

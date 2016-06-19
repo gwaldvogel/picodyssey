@@ -4,6 +4,13 @@ import QtLocation 5.6
 import QtPositioning 5.3
 
 Item {
+  anchors.fill: parent
+
+  Component.onCompleted: {
+    app.loadNewPlace();
+    console.log("component on completed")
+  }
+
   Map {
     id: resultMap
     plugin: Plugin {
@@ -29,10 +36,10 @@ Item {
 
     Marker {
       id: resultMarker
-//      coordinate { // carl schurz haus
-//        latitude: 47.99713
-//        longitude: 7.843844
-//      }
+      //      coordinate { // carl schurz haus
+      //        latitude: 47.99713
+      //        longitude: 7.843844
+      //      }
       coordinate: globalInternal.markerPosition
     }
 
@@ -54,14 +61,14 @@ Item {
     font.pointSize: Screen.pixelDensity * 4
     color: "#ffffff"
     text: "Distance: " + resultMarker.coordinate.distanceTo(actualMarker.coordinate).toFixed(2)  + "m"
+
     MouseArea {
       anchors.fill: parent
       onClicked: {
-          pageStack.push("qrc:/qml/ImagePage.qml");
+        app.nextPlace();
+        pageStack.clear();
+        pageStack.push("qrc:/qml/ImagePage.qml");
       }
     }
-  }
-  Component.onCompleted: {
-    app.loadNewPlace();
   }
 }

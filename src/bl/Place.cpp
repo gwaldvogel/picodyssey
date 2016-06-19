@@ -20,6 +20,7 @@ Place::Place(QObject *pParent, QString name, QGeoCoordinate geoCoordinate, QStri
   , m_description(description)
   , m_city(city)
 {
+  emit imageChanged();
 }
 
 Place::Place(QObject* pParent, QUuid placeId, QString name, QDate date, QGeoCoordinate geoCoordinate, QString image, QUrl thumbnail, QString description, QString city)
@@ -33,6 +34,7 @@ Place::Place(QObject* pParent, QUuid placeId, QString name, QDate date, QGeoCoor
   , m_description(description)
   , m_city(city)
 {
+  emit imageChanged();
 }
 
 Place* Place::fromJson(QJsonDocument jsonDoc, QObject* pParent)
@@ -44,13 +46,13 @@ Place* Place::fromJson(QJsonDocument jsonDoc, QObject* pParent)
     QImage tempImage;
     QString image;
     Place::base64ToImage(tempImage, jsonObj["image"].toString().toLatin1());
-    image = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/tempImage.jpg";
+    image = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/tempImage" + QString::number(qrand())  + ".jpg";
 
     if(!QDir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)).exists())
     {
       QDir().mkdir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
     }
-//    tempImage.save(image, "JPG");
+
     QImageWriter writer(image);
     if(!writer.write(tempImage))
     {
