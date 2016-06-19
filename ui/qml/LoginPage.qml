@@ -62,6 +62,7 @@ Image {
         anchors.fill: parent
         onClicked: {
 //          if(username.text == "admin" && password.text == "admin")
+          if(app.currentPlace !== null)
           {
             app.loggedIn = true;
             pageStack.pop();
