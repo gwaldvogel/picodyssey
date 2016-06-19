@@ -21,12 +21,8 @@ Item {
     width: parent.width
     height: parent.height - loadingBarOuter.height - lockInButton.height + 1
 
-    zoomLevel: map.maximumZoomLevel - 3
-
-    center { // carl schurz haus
-      latitude: 47.99713
-      longitude: 7.843844
-    }
+    zoomLevel: globalInternal.defaultZoomLevel
+    center: globalInternal.defaultCenter
 
     gesture.enabled: true
 

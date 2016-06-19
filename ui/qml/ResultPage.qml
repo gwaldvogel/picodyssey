@@ -13,12 +13,8 @@ Item {
     width: parent.width
     height: parent.height - resultText.height * 3
 
-//    zoomLevel: resultMap.maximumZoomLevel - 3
-
-    visibleRegion: {
-      console.log(QtPositioning.rectangle(resultMarker.coordinate, actualMarker.coordinate), resultMarker.coordinate, actualMarker.coordinate)
-      return QtPositioning.rectangle(resultMarker.coordinate, actualMarker.coordinate);
-    }
+    zoomLevel: globalInternal.defaultZoomLevel
+    center: globalInternal.defaultCenter
 
     gesture.enabled: true
 
@@ -57,7 +53,7 @@ Item {
 
     font.pointSize: Screen.pixelDensity * 4
     color: "#ffffff"
-    text: "Distance: " + (resultMarker.coordinate.distanceTo(actualMarker.coordinate).toFixed(2) > 2000) ? (resultMarker.coordinate.distanceTo(actualMarker.coordinate) / 1000).toFixed(2) + "km" : resultMarker.coordinate.distanceTo(actualMarker.coordinate).toFixed(2)  + "m"
+    text: "Distance: " + resultMarker.coordinate.distanceTo(actualMarker.coordinate).toFixed(2)  + "m"
     MouseArea {
       anchors.fill: parent
       onClicked: {

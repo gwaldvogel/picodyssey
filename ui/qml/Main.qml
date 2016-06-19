@@ -199,5 +199,7 @@ Window {
   QtObject {
     id: globalInternal
     property var markerPosition: QtPositioning.coordinate(0, 0)
+    property variant defaultCenter: QtPositioning.coordinate(47.9930179461532, 7.830405194089337)
+    property double defaultZoomLevel: 12.982000000000003
   }
 }
