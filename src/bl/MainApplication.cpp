@@ -6,10 +6,13 @@
 MainApplication::MainApplication(QQmlApplicationEngine* pEngine, QObject *pParent)
   : QObject(pParent)
   , m_bLoggedIn(false)
+//  , m_lastMarkerCoordinates()
   , m_pEngine(pEngine)
+  , cconfig(this, "http://192.168.2.192", 80)
 //  , m_pOAuthHandlerTwitter(new OAuthHandlerFacebook(this))
 {
   initUiConnections();
+  cconfig.getRandPlace();
 }
 
 void MainApplication::load()
@@ -44,6 +47,25 @@ Place*MainApplication::getCurrentPlace()
 {
   return m_pCurrentPlace;
 }
+
+void MainApplication::loadNewPlace()
+{
+  cconfig.getRandPlace();
+}
+
+//QGeoCoordinate MainApplication::getLastMarkerCoordinates()
+//{
+//  return m_lastMarkerCoordinates;
+//}
+
+//void MainApplication::setLastMarkerCoordinates(QGeoCoordinate marker)
+//{
+//  if(m_lastMarkerCoordinates != marker)
+//  {
+//    m_lastMarkerCoordinates = marker;
+//    emit lastMarkerCoordinatesChanged();
+//  }
+//}
 
 void MainApplication::uploadPicture(QString image)
 {
