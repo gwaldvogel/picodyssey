@@ -1,11 +1,15 @@
 #include "Place.h"
 
 #include <QBuffer>
+#include <QStandardPaths>
+#include <QDir>
+#include <QDebug>
+#include <QImageWriter>
 
 QString const Place::kKeyType = "type";
 QString const Place::kValType = "place";
 
-Place::Place(QObject *pParent, QString name, QGeoCoordinate geoCoordinate, QImage image, QUrl thumbnail, QString description, QString city)
+Place::Place(QObject *pParent, QString name, QGeoCoordinate geoCoordinate, QString image, QUrl thumbnail, QString description, QString city)
   : QObject(pParent)
   , m_placeId(QUuid::createUuid())
   , m_name(name)
@@ -18,7 +22,7 @@ Place::Place(QObject *pParent, QString name, QGeoCoordinate geoCoordinate, QImag
 {
 }
 
-Place::Place(QObject* pParent, QUuid placeId, QString name, QDate date, QGeoCoordinate geoCoordinate, QImage image, QUrl thumbnail, QString description, QString city)
+Place::Place(QObject* pParent, QUuid placeId, QString name, QDate date, QGeoCoordinate geoCoordinate, QString image, QUrl thumbnail, QString description, QString city)
   : QObject(pParent)
   , m_placeId(placeId)
   , m_name(name)
@@ -37,8 +41,21 @@ Place* Place::fromJson(QJsonDocument jsonDoc, QObject* pParent)
   if(jsonDoc.isObject() && !jsonDoc.isNull() && !jsonDoc.isEmpty())
   {
     QJsonObject jsonObj = jsonDoc.object();
-    QImage image;
-    Place::base64ToImage(image, jsonObj["image"].toString().toLatin1());
+    QImage tempImage;
+    QString image;
+    Place::base64ToImage(tempImage, jsonObj["image"].toString().toLatin1());
+    image = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/tempImage.jpg";
+
+    if(!QDir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)).exists())
+    {
+      QDir().mkdir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
+    }
+//    tempImage.save(image, "JPG");
+    QImageWriter writer(image);
+    if(!writer.write(tempImage))
+    {
+      qDebug() << writer.errorString();
+    }
     retVal = new Place(pParent,
                      QUuid(jsonObj["placeId"].toString()),
                      jsonObj["name"].toString(),
@@ -63,13 +80,14 @@ void Place::imageTo64Base(QByteArray& base64Image, QImage const& imagePng)
   buffer.open(QIODevice::WriteOnly);
   imagePng.save(&buffer, "JPG");
   base64Image = base64Image.toBase64();
+
 }
 
 QJsonDocument Place::toJson()
 {
   QJsonObject jsonObj;
   QByteArray base64Image;
-  Place::imageTo64Base(base64Image, m_image);
+//  Place::imageTo64Base(base64Image, m_image);
   jsonObj.insert("placeId", m_placeId.toString().replace("{", "").replace("}", ""));
   jsonObj.insert("name", m_name);
   jsonObj.insert("date", (m_date.toMSecsSinceEpoch() / 1000));
@@ -82,5 +100,3 @@ QJsonDocument Place::toJson()
   jsonObj.insert(kKeyType, kValType);
   return QJsonDocument(jsonObj);
 }
-
-

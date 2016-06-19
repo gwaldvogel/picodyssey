@@ -79,4 +79,7 @@ Rectangle {
       }
     }
   }
+  Image {
+    source: "file://" + app.currentPlace.image
+  }
 }
