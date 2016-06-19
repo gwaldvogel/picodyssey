@@ -60,11 +60,12 @@ Place* Place::fromJson(QJsonDocument jsonDoc, QObject* pParent)
                      QUuid(jsonObj["placeId"].toString()),
                      jsonObj["name"].toString(),
                      QDateTime::fromMSecsSinceEpoch(jsonObj["date"].toInt() * 1000).date(),
-                     QGeoCoordinate(jsonObj["geoN"].toDouble(), jsonObj["geoE"].toDouble()),
+                     QGeoCoordinate(jsonObj["geoN"].toString().toDouble(), jsonObj["geoE"].toString().toDouble()),
                      image,
                      jsonObj["thumbnail"].toString(),
                      jsonObj["description"].toString(),
                      jsonObj["city"].toString());
+    qDebug() << jsonObj["geoN"].toString().toDouble() << jsonObj["geoE"].toDouble() << QGeoCoordinate(jsonObj["geoN"].toDouble(), jsonObj["geoE"].toDouble()) << QGeoCoordinate(jsonObj["geoN"].toDouble(), jsonObj["geoE"].toDouble()).latitude(), QGeoCoordinate(jsonObj["geoN"].toDouble(), jsonObj["geoE"].toDouble()).longitude();
   }
   return retVal;
 }

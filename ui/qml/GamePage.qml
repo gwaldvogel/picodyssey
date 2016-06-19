@@ -6,6 +6,12 @@ Item {
   id: gamePage
   objectName: "GamePage"
 
+  function lockIn()
+  {
+    globalInternal.markerPosition = marker.coordinate
+    pageStack.push("qrc:/qml/ResultPage.qml");
+  }
+
   Map {
     id: map
     plugin: Plugin {
@@ -78,8 +84,7 @@ Item {
     interval: 30000
     repeat: false
     onTriggered: {
-      console.log("time is over");
-      pageStack.push("qrc:/qml/ResultPage.qml");
+      gamePage.lockIn();
     }
   }
 
@@ -107,9 +112,8 @@ Item {
       onClicked: {
         if(marker.visible)
         {
-          console.log("locked in");
-          pageStack.push("qrc:/qml/ResultPage.qml");
           timer.stop();
+          gamePage.lockIn();
         }
       }
     }

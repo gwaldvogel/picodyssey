@@ -17,9 +17,9 @@ int main(int argc, char *argv[])
   MainApplication mainApplication(&engine, &app);
   mainApplication.load();
 
-  cloudconnection::CloudConfig cconfig(&mainApplication, "http://192.168.0.104", 80);
-  QUuid uuid("0815");
-  cconfig.getRandPlace();
+//  cloudconnection::CloudConfig cconfig(&mainApplication, "http://192.168.0.104", 80);
+//  QUuid uuid("0815");
+//  cconfig.getRandPlace();
 
   return app.exec();
 }

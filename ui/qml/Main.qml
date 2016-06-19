@@ -1,6 +1,8 @@
 import QtQuick 2.5
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.4
+import QtLocation 5.6
+import QtPositioning 5.2
 
 Window {
   id: mainWindow
@@ -55,16 +57,18 @@ Window {
       switch(actionId)
       {
       case "play":
-        pageStack.push("qrc:/qml/GamePage.qml");
+        pageStack.push("qrc:/qml/ImagePage.qml");
         break;
       case "camera":
         pageStack.push("qrc:/qml/Camera.qml");
         break;
       case "highscore":
-        pageStack.push("qrc:/qml/Highscore.qml");
+//        pageStack.push("qrc:/qml/Highscore.qml");
+        console.log("not yet implemented");
         break;
       case "about":
-        pageStack.push("qrc:/qml/About.qml");
+//        pageStack.push("qrc:/qml/About.qml");
+        console.log("not yet implemented");
         break;
       }
     }
@@ -191,4 +195,9 @@ Window {
   //    anchors.bottom: parent.bottom
   //    onClicked: sidebarMenu.toggleSidebar()
   //  }
+
+  QtObject {
+    id: globalInternal
+    property var markerPosition: QtPositioning.coordinate(0, 0)
+  }
 }

@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Window 2.0
 import QtLocation 5.6
+import QtPositioning 5.3
 
 Item {
   Map {
@@ -12,14 +13,14 @@ Item {
     width: parent.width
     height: parent.height - resultText.height * 3
 
-    zoomLevel: resultMap.maximumZoomLevel - 3
+//    zoomLevel: resultMap.maximumZoomLevel - 3
 
-    center { // carl schurz haus
-      latitude: 47.99713
-      longitude: 7.843844
+    visibleRegion: {
+      console.log(QtPositioning.rectangle(resultMarker.coordinate, actualMarker.coordinate), resultMarker.coordinate, actualMarker.coordinate)
+      return QtPositioning.rectangle(resultMarker.coordinate, actualMarker.coordinate);
     }
 
-    gesture.enabled: false
+    gesture.enabled: true
 
     MapPolyline {
       line.width: 3
@@ -32,10 +33,11 @@ Item {
 
     Marker {
       id: resultMarker
-      coordinate { // carl schurz haus
-        latitude: 47.99713
-        longitude: 7.843844
-      }
+//      coordinate { // carl schurz haus
+//        latitude: 47.99713
+//        longitude: 7.843844
+//      }
+      coordinate: globalInternal.markerPosition
     }
 
     Marker {
@@ -55,6 +57,15 @@ Item {
 
     font.pointSize: Screen.pixelDensity * 4
     color: "#ffffff"
-    text: "Distance: " + resultMarker.coordinate.distanceTo(actualMarker.coordinate).toFixed(2) + "m"
+    text: "Distance: " + (resultMarker.coordinate.distanceTo(actualMarker.coordinate).toFixed(2) > 2000) ? (resultMarker.coordinate.distanceTo(actualMarker.coordinate) / 1000).toFixed(2) + "km" : resultMarker.coordinate.distanceTo(actualMarker.coordinate).toFixed(2)  + "m"
+    MouseArea {
+      anchors.fill: parent
+      onClicked: {
+          pageStack.push("qrc:/qml/ImagePage.qml");
+      }
+    }
+  }
+  Component.onCompleted: {
+    app.loadNewPlace();
   }
 }
